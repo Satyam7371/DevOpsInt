@@ -1,7 +1,7 @@
 # Task 1: File Permissions
 
 ## Description
-Create a file named `manish.txt`, assign permissions (read, write, execute) to different user categories (owner, group, others), and practice changing permissions using `chmod`.
+Create a file named `satyam.txt`, assign permissions (read, write, execute) to different user categories (owner, group, others), and practice changing permissions using `chmod`.
 
 ## Instructions
 
@@ -30,7 +30,7 @@ Create a file named `manish.txt`, assign permissions (read, write, execute) to d
 3. **Verify Permissions**
     Use the `ls -l` command to check the permissions of the file:
     ```sh
-    ls -l manish.txt
+    ls -l satyam.txt
     ```
     You should see an output like this:
     ```
