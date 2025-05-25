@@ -1,17 +1,18 @@
-Description
+# Task 6: Introduction to Version Control and Git Basics
 
-Version control is a system that tracks changes to files over time. It allows multiple people to collaborate, monitor progress, and revert to previous versions when necessary. Git is the most widely used distributed version control system, essential for modern software development.
+## 📌 Description
+Version control is a system that tracks changes to files over time. It allows multiple people to collaborate, monitor progress, and revert to previous versions when necessary. **Git** is the most widely used distributed version control system, essential for modern software development.
 
 This task introduces Git, covering its installation, setup, and the most commonly used commands.
 
-🛠️ Installation and Configuration
+---
 
-Install Git
-On Ubuntu/Debian:
+## 🛠️ Installation and Configuration
 
-bash
-Copy
-Edit
+### Install Git
+
+**On Ubuntu/Debian:**
+```bash
 sudo apt update
 sudo apt install git
 On macOS (using Homebrew):
@@ -21,11 +22,9 @@ Copy
 Edit
 brew install git
 On Windows:
-
 Download and install from https://git-scm.com/download/win
 
 Configure Git
-
 bash
 Copy
 Edit
@@ -35,7 +34,6 @@ git config --list
 This sets your global username and email for commits and verifies the configuration.
 
 🔁 Basic Git Commands
-
 1. Initialize a Git Repository
 bash
 Copy
@@ -49,46 +47,45 @@ Copy
 Edit
 git add filename      # Add a specific file
 git add .             # Add all files
-4. Commit the Changes
+3. Commit the Changes
 bash
 Copy
 Edit
 git commit -m "Your commit message"
 Saves the changes you've added to the staging area.
 
-5. Check the Status
-
+4. Check the Status
 bash
 Copy
 Edit
 git status
 Shows the current state of the working directory and staging area.
 
-6. View Commit History
-
+5. View Commit History
 bash
 Copy
 Edit
 git log
 Displays a list of all commits in the repository.
 
-8. Connect to a Remote Repository
+6. Connect to a Remote Repository
 bash
 Copy
 Edit
 git remote add origin https://github.com/your-username/your-repo.git
 Links your local Git repository to a remote GitHub repository.
 
-9. Push Changes to Remote
+7. Push Changes to Remote
 bash
 Copy
 Edit
 git push -u origin main
 Sends your local commits to the remote repository.
 
-10. Pull Changes from Remote
+8. Pull Changes from Remote
 bash
 Copy
 Edit
 git pull origin main
 Fetches and integrates changes from the remote repository.
+
