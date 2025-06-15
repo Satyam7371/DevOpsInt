@@ -1,5 +1,7 @@
 1. Introduction to Containerization and Docker Fundamentals
+   
 🔹 What is Containerization?
+
 Containerization is a method of packaging and running applications and their dependencies in isolated environments called containers. Unlike virtual machines, containers share the host OS kernel and are lightweight and fast to start.
 
 Benefits:
