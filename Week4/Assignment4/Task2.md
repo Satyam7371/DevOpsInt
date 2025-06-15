@@ -29,52 +29,72 @@ Copy
 Edit
 docker --version
 🔸 Step 2: Basic Docker Container Operations
+
+
 ✅ Pull Image
 bash
 Copy
 Edit
 docker pull ubuntu
+
+
 ✅ Run a Container
 bash
 Copy
 Edit
 docker run ubuntu echo "Hello from Docker"
+
+
 ✅ Interactive Shell
 bash
 Copy
 Edit
 docker run -it ubuntu bash
+
+
 ✅ List Containers
 bash
 Copy
 Edit
 docker ps           # Running containers
 docker ps -a        # All containers
+
+
 ✅ Stop & Remove Containers
 bash
 Copy
 Edit
 docker stop <container_id>
 docker rm <container_id>
+
+
 ✅ Remove Image
 bash
 Copy
 Edit
 docker rmi <image_name>
+
+
 🔸 Step 3: Build Docker Image from Dockerfile
 📁 Project Structure:
 pgsql
 Copy
 Edit
+
+
 my-docker-app/
 ├── Dockerfile
 ├── index.js
 └── package.json
+
+
 🧾 index.js
 js
 Copy
 Edit
 console.log("Docker App Running!");
+
+
 🧾 package.json
 json
 Copy
@@ -87,6 +107,7 @@ Edit
     "start": "node index.js"
   }
 }
+
 🧾 Dockerfile
 Dockerfile
 Copy
@@ -96,6 +117,8 @@ WORKDIR /app
 COPY . .
 RUN npm install
 CMD ["npm", "start"]
+
+
 ✅ Build & Run
 bash
 Copy
