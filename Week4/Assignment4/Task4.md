@@ -36,8 +36,10 @@ bash
 Copy
 Edit
 docker run -d -p 8080:80 nginx-custom
-Method 2: Commit from a Running Container
-This method is used when changes are made interactively in a container and need to be saved.
+
+### Method 2: Commit from a Running Container
+
+This method allows creating an image from a running container by committing its current state.
 
 ✅ Step-by-Step:
 Run a base container:
@@ -46,32 +48,32 @@ bash
 Copy
 Edit
 docker run -it ubuntu bash
-Install software inside container (example):
+Inside container, install something:
 
 bash
 Copy
 Edit
 apt update && apt install -y nginx
 exit
-List container ID:
+Get the container ID:
 
 bash
 Copy
 Edit
 docker ps -a
-Commit container as image:
+Commit the container as a new image:
 
 bash
 Copy
 Edit
 docker commit <container_id> nginx-committed
-Run the committed image:
+Run the new image:
 
 bash
 Copy
 Edit
 docker run -d -p 8081:80 nginx-committed
-Comparison
+🧾 Comparison Table
 Method	Pros	Cons
-Dockerfile	Reproducible, versioned	Requires writing a file
-Commit Method	Quick for manual changes	Not version-controlled, error-prone
+Dockerfile	Reproducible, versioned	Requires writing a Dockerfile
+Commit Method	Quick for manual changes	Not version-controlled, less portable
