@@ -1,10 +1,14 @@
-🔹 Objective:
+## Task 2: Docker Installation, Basic Container Operations & Building from Dockerfile
+
+### Objective
+
 To install Docker, perform basic container operations (run, stop, remove), and build a custom Docker image from a Dockerfile.
 
-🔸 Step 1: Docker Installation (Ubuntu-based)
-bash
-Copy
-Edit
+---
+
+### Step 1: Docker Installation (Ubuntu-based)
+
+```bash
 sudo apt update
 sudo apt install \
     ca-certificates \
@@ -22,80 +26,69 @@ echo \
 
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io
-✔️ Verify Installation:
+Verify Docker Installation:
 
 bash
 Copy
 Edit
 docker --version
-🔸 Step 2: Basic Docker Container Operations
+Step 2: Basic Docker Container Operations
+Pull an Image:
 
-
-✅ Pull Image
 bash
 Copy
 Edit
 docker pull ubuntu
+Run a Container:
 
-
-✅ Run a Container
 bash
 Copy
 Edit
 docker run ubuntu echo "Hello from Docker"
+Run a Container with Interactive Shell:
 
-
-✅ Interactive Shell
 bash
 Copy
 Edit
 docker run -it ubuntu bash
+List Containers:
 
-
-✅ List Containers
 bash
 Copy
 Edit
-docker ps           # Running containers
-docker ps -a        # All containers
+docker ps         # Running containers
+docker ps -a      # All containers
+Stop and Remove a Container:
 
-
-✅ Stop & Remove Containers
 bash
 Copy
 Edit
 docker stop <container_id>
 docker rm <container_id>
+Remove Docker Image:
 
-
-✅ Remove Image
 bash
 Copy
 Edit
 docker rmi <image_name>
+Step 3: Build Docker Image from Dockerfile
+Project Structure:
 
-
-🔸 Step 3: Build Docker Image from Dockerfile
-📁 Project Structure:
 pgsql
 Copy
 Edit
-
-
 my-docker-app/
 ├── Dockerfile
 ├── index.js
 └── package.json
+index.js
 
-
-🧾 index.js
 js
 Copy
 Edit
 console.log("Docker App Running!");
+package.json
 
-
-🧾 package.json
 json
 Copy
 Edit
@@ -107,8 +100,8 @@ Edit
     "start": "node index.js"
   }
 }
+Dockerfile
 
-🧾 Dockerfile
 Dockerfile
 Copy
 Edit
@@ -117,9 +110,8 @@ WORKDIR /app
 COPY . .
 RUN npm install
 CMD ["npm", "start"]
+Build and Run:
 
-
-✅ Build & Run
 bash
 Copy
 Edit
