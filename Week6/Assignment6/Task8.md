@@ -1,88 +1,74 @@
 ### 🎯 Objective
 
-Learn how to:
-- Create a **PersistentVolumeClaim (PVC)** using dynamic provisioning in AKS
-- Attach the PVC to a pod
-- Persist data even if the pod restarts
+Learn how to configure **liveness** and **readiness** probes in Azure Kubernetes Service (AKS) to ensure application stability and self-healing behavior.
 
 ---
 
-## 🔹 Step 1: Define the PersistentVolumeClaim
+## 🔹 What Are Health Probes?
 
-In AKS, volumes are typically dynamically provisioned using a **StorageClass** provided by Azure.
+| Probe Type     | Purpose                                                                 |
+|----------------|-------------------------------------------------------------------------|
+| Liveness Probe | Checks if the application is **alive**. Restarts the container if failed. |
+| Readiness Probe| Checks if the app is **ready to receive traffic**. Temporarily removes pod from service if failed. |
 
-### 📄 pvc.yaml
+---
+
+## 📄 Example Pod with Liveness and Readiness Probes
 
 ```yaml
 apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: azure-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  storageClassName: managed-csi
-📝 managed-csi is the default Azure CSI-based StorageClass in AKS.
-
-🔹 Step 2: Create a Pod Using the PVC
-📄 pod.yaml
-yaml
-Copy
-Edit
-apiVersion: v1
 kind: Pod
 metadata:
-  name: pvc-demo-pod
+  name: health-check-pod
 spec:
   containers:
     - name: nginx
       image: nginx
-      volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: storage
-  volumes:
-    - name: storage
-      persistentVolumeClaim:
-        claimName: azure-pvc
-🔧 Step 3: Apply the YAML Files
+      ports:
+        - containerPort: 80
+      livenessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 10
+        periodSeconds: 5
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 5
+🧪 Step-by-Step: Deploy and Verify
+Step 1: Apply the Pod Definition
 bash
 Copy
 Edit
-kubectl apply -f pvc.yaml
-kubectl apply -f pod.yaml
-🧪 Step 4: Verify PVC and Pod Binding
-Check PVC status:
-
-bash
-Copy
-Edit
-kubectl get pvc
-Expected output:
-
-pgsql
-Copy
-Edit
-NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-azure-pvc   Bound    pvc-xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx     1Gi        RWO            managed-csi     1m
-Check pod status and verify it's running:
-
+kubectl apply -f health-probes.yaml
+Step 2: Check Pod Status
 bash
 Copy
 Edit
 kubectl get pods
-🧠 Notes
-Azure dynamically provisions a disk in the background once the PVC is created.
+It should show Running if the probes pass.
 
-If the pod is deleted, the volume remains and can be reattached.
-
-Volume is node-bound when using ReadWriteOnce mode (only available to one node at a time).
-
-🧼 Cleanup (Optional)
+Step 3: Describe the Pod for Events
 bash
 Copy
 Edit
-kubectl delete -f pod.yaml
-kubectl delete -f pvc.yaml
+kubectl describe pod health-check-pod
+Look for events related to liveness/readiness probes.
+
+🧠 Key Fields Explained
+Field	Description
+initialDelaySeconds	Time before probe is initiated
+periodSeconds	How often the probe is performed
+failureThreshold	Number of failures before action is taken
+httpGet, tcpSocket, exec	Supported probe types
+
+💡 Pro Tips
+Liveness probe failures = container restarts
+
+Readiness probe failures = container removed from service endpoints
+
+Use exec probes for custom health scripts inside the container
+
