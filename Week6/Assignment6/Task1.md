@@ -1,18 +1,21 @@
-### 🎯 Objective
 
-Learn how to deploy applications using three key Kubernetes components:
-- **ReplicationController**
-- **ReplicaSet**
-- **Deployment**
+## 🎯 Objective
 
-Understand their usage, YAML structure, and key pros/cons.
+Learn how to deploy Kubernetes workloads using:
+
+- ReplicationController
+- ReplicaSet
+- Deployment
+
+Also understand the differences, pros, and cons of each controller type.
 
 ---
 
-## 🧩 1. ReplicationController (RC)
+## 1. ReplicationController (RC)
 
 ### ✅ Purpose
-Ensures a specified number of pod replicas are running at all times.
+
+Ensures a specified number of pod replicas are always running.
 
 ### 📄 Sample YAML
 
@@ -31,18 +34,18 @@ spec:
         app: myapp
     spec:
       containers:
-      - name: my-container
-        image: nginx
-        ports:
-        - containerPort: 80
-🔧 Apply RC
+        - name: my-container
+          image: nginx
+          ports:
+            - containerPort: 80
+🔧 Apply Command
 bash
 Copy
 Edit
 kubectl apply -f rc.yaml
-📦 2. ReplicaSet (RS)
+2. ReplicaSet (RS)
 ✅ Purpose
-A newer, more flexible version of ReplicationController. Supports advanced label selectors.
+A newer version of RC with support for set-based selectors.
 
 📄 Sample YAML
 yaml
@@ -63,18 +66,18 @@ spec:
         app: myapp
     spec:
       containers:
-      - name: my-container
-        image: nginx
-        ports:
-        - containerPort: 80
-🔧 Apply RS
+        - name: my-container
+          image: nginx
+          ports:
+            - containerPort: 80
+🔧 Apply Command
 bash
 Copy
 Edit
 kubectl apply -f rs.yaml
-🚀 3. Deployment
+3. Deployment
 ✅ Purpose
-Manages ReplicaSets and adds update/rollback strategies. Most widely used in real-world applications.
+Used to manage ReplicaSets and enable rolling updates, rollbacks, and zero-downtime deployments.
 
 📄 Sample YAML
 yaml
@@ -95,19 +98,19 @@ spec:
         app: myapp
     spec:
       containers:
-      - name: my-container
-        image: nginx:latest
-        ports:
-        - containerPort: 80
-🔧 Apply Deployment
+        - name: my-container
+          image: nginx
+          ports:
+            - containerPort: 80
+🔧 Apply Command
 bash
 Copy
 Edit
 kubectl apply -f deployment.yaml
-🧠 Comparison Table
+📊 Comparison Table
 Feature	ReplicationController	ReplicaSet	Deployment
 API Version	v1	apps/v1	apps/v1
-Rolling Updates	❌ Not supported	❌ Not supported	✅ Supported
-Rollback Capability	❌	❌	✅ Yes
-Usage in Production	❌ Obsolete	⚠️ Intermediate	✅ Standard
+Rolling Updates	❌ No	❌ No	✅ Yes
+Rollback Support	❌ No	❌ No	✅ Yes
+Recommended Usage	❌ Deprecated	⚠️ Intermediate	✅ Production
 
